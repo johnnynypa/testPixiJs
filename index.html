@@ -9,13 +9,50 @@
 </head>
 <body>
     <script>
-        var renderer = PIXI.autoDetectRenderer(400,400);
-        document.body.appendChild(renderer.view);
+        var app = new PIXI.Application(1000, 700, {backgroundColor : 0x1099bb});
+        document.body.appendChild(app.view);
 
-        var stage  = new PIXI.Container();
+        var circle = new PIXI.Graphics();
+        circle.beginFill(0x9966FF);
+        circle.drawCircle(0, 0, 60);
+        circle.endFill();
+        circle.x = 64;
+        circle.y = 130;
+        app.stage.addChild(circle);
 
-        renderer.render(stage);
+        circle.interactive = true;
+        circle.buttonMode = true;
 
+        circle
+            .on('pointerdown', onDragStart)
+            .on('pointerup', onDragEnd)
+            .on('pointerupoutside', onDragEnd)
+            .on('pointermove', onDragMove);
+
+        function onDragStart(event) {
+            this.data = event.data;
+            // this.alpha = 0.5; //Cambia el color mientras se arrastra
+            this.dragging = true;
+        }
+
+        function onDragEnd() {
+            // this.alpha = 1; //Restaura el color al dejar de mover
+            this.dragging = false;
+            // Establece los datos de interaccion a null
+            this.data = null;
+        }
+
+        function onDragMove() {
+            if (this.dragging) { //Si se mueve
+                console.log( this.x + " " + this.y)
+                /**
+                 * Si se mueve el objeto
+                */
+                var newPosition = this.data.getLocalPosition(this.parent);
+                this.x = newPosition.x;
+                this.y = newPosition.y;
+            }
+        }
 
     </script>
 </body>
