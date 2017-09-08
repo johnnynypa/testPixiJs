@@ -13,6 +13,7 @@
         document.body.appendChild(app.view);
 
         var circle = new PIXI.Graphics();
+        circle.lineStyle(2, 0x0000FF, 1)
         circle.beginFill(0x9966FF);
         circle.drawCircle(0, 0, 60);
         circle.endFill();
@@ -53,15 +54,30 @@
             if (this.dragging) { //Si se mueve el objeto
                 console.log( this.x + " " + this.y)
 
-                // if()
+                
+                var newPosition = this.data.getLocalPosition(this.parent);
 
                 /**
                  * Establecemos la nueva posicion
                 */
-                var newPosition = this.data.getLocalPosition(this.parent);
-                this.x = newPosition.x;
-                this.y = newPosition.y;
+                
+
+                if(this.x == 820 || this.x > 820){
+                    this.dragging = false;
+                    this.data = null;
+                    this.alpha = numeroAleatorio();
+                    this.x = 100;
+                    this.y = 320;
+                }else{
+                    this.x = newPosition.x;
+                    this.y = newPosition.y;
+                }            
+
             }
+        }
+
+        function numeroAleatorio() {
+            return Math.random() * 5;
         }
 
     </script>
