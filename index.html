@@ -16,8 +16,8 @@
         circle.beginFill(0x9966FF);
         circle.drawCircle(0, 0, 60);
         circle.endFill();
-        circle.x = 64;
-        circle.y = 130;
+        circle.x = 100;
+        circle.y = 320;
         app.stage.addChild(circle);
 
         circle.interactive = true;
@@ -28,6 +28,13 @@
             .on('pointerup', onDragEnd)
             .on('pointerupoutside', onDragEnd)
             .on('pointermove', onDragMove);
+
+
+        var rect = new PIXI.Graphics();
+        rect.lineStyle(2, 0x0000FF, 1);
+        rect.beginFill(0xFF700B, 1);
+        rect.drawRect(880, 0, 120, 700);
+        app.stage.addChild(rect);
 
         function onDragStart(event) {
             this.data = event.data;
@@ -43,10 +50,13 @@
         }
 
         function onDragMove() {
-            if (this.dragging) { //Si se mueve
+            if (this.dragging) { //Si se mueve el objeto
                 console.log( this.x + " " + this.y)
+
+                // if()
+
                 /**
-                 * Si se mueve el objeto
+                 * Establecemos la nueva posicion
                 */
                 var newPosition = this.data.getLocalPosition(this.parent);
                 this.x = newPosition.x;
