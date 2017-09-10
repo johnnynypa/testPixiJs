@@ -13,7 +13,7 @@
         document.body.appendChild(app.view);
 
         var circle = new PIXI.Graphics();
-        circle.lineStyle(2, 0x0000FF, 1)
+        circle.lineStyle(2, 0xFFFFFF, 1)
         circle.beginFill(0x9966FF);
         circle.drawCircle(0, 0, 60);
         circle.endFill();
@@ -64,7 +64,12 @@
                     this.dragging = false;
                     this.data = null;
                     this.alpha = numeroAleatorio();
-                    this.x = 100;
+                    
+
+                    for(var i = 820 ; i>= 100; i -= 1){
+                        this.x=i;
+                    }
+
                     this.y = 320;
                 }else{
                     this.x = newPosition.x;
